@@ -1,11 +1,16 @@
 const router = require("express").Router();
+const { get } = require("mongoose");
 const booksController = require("../../controllers/booksController");
 
 
 router.route("/")
+  .get(booksController.findAll)
+  .post(booksController.create);
 
-router.route("/books")
+router
+  .route("/:id")
+  .get(booksController.findById)
+  .put(booksController.update)
+  .delete(booksController.remove);
 
-router.route("/saved")
-
-router.route("/saved/:id")
+module.exports = router;
